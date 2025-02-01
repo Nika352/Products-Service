@@ -9,7 +9,7 @@ public class Product : Entity
     public decimal Price { get; set; }
     public int CategoryId { get; set; }
     public int CountryId { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime EndDate { get; set; }
     
     public Category Category { get; set; }

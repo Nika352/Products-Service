@@ -6,7 +6,11 @@ using WebProducts.Infrastructure.Repositories.Repository;
 
 namespace WebProducts.Infrastructure.Repositories;
 
-public class ProductRepository : IRepository<Product>
+public interface IProductRepository : IRepository<Product>
+{
+}
+
+public class ProductRepository : IProductRepository
 {
     private readonly ProductsDbContext _dbContext;
     

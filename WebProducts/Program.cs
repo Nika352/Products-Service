@@ -1,8 +1,11 @@
 using System.Reflection;
+using System.Runtime.Loader;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebProducts.Application;
+using WebProducts.Infrastructure;
 using WebProducts.Infrastructure.Persistence;
 using WebProducts.Infrastructure.Repositories;
 
@@ -15,16 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ProductsDbContext>(options =>
-{
-    options.UseSqlServer("Server=localhost;Database=db_WebProducts;Trusted_Connection=True;TrustServerCertificate=True");
-});
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //Ganixile DI
-builder.Services.AddScoped<IMediator, Mediator>();
-builder.Services.AddScoped<ProductRepository>();
 
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

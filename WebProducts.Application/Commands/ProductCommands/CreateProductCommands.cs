@@ -8,10 +8,10 @@ public record CreateProductCommand(int Code, string Name, decimal Price, int Cat
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
 {
-    private readonly ProductRepository _productRepository;
+    private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateProductCommandHandler(ProductRepository productRepository, IUnitOfWork unitOfWork)
+    public CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;
