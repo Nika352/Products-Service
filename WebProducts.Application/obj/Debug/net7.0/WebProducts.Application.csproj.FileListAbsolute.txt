@@ -1,0 +1,15 @@
+D:\Git\WebProducts\WebProducts.Application\bin\Debug\net7.0\WebProducts.Application.deps.json
+D:\Git\WebProducts\WebProducts.Application\bin\Debug\net7.0\WebProducts.Application.dll
+D:\Git\WebProducts\WebProducts.Application\bin\Debug\net7.0\WebProducts.Application.pdb
+D:\Git\WebProducts\WebProducts.Application\bin\Debug\net7.0\WebProducts.Infrastructure.dll
+D:\Git\WebProducts\WebProducts.Application\bin\Debug\net7.0\WebProducts.Infrastructure.pdb
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.csproj.AssemblyReference.cache
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.AssemblyInfoInputs.cache
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.AssemblyInfo.cs
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.csproj.CoreCompileInputs.cache
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.csproj.CopyComplete
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.dll
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\refint\WebProducts.Application.dll
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\WebProducts.Application.pdb
+D:\Git\WebProducts\WebProducts.Application\obj\Debug\net7.0\ref\WebProducts.Application.dll
