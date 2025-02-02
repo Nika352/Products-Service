@@ -7,7 +7,7 @@ using WebProducts.Models;
 namespace WebProducts.Controllers.ProductControllers;
 
 [ApiController]
-[Route("[Controller]")]
+[Route("product")]
 public class ProductController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -17,39 +17,46 @@ public class ProductController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("ByProductId")]
-    public async Task<IActionResult> Get([FromQuery]IdModel model)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
     {
-        var result = await _mediator.Send(new GetProductCommand(model.Id));
+        var result = await _mediator.Send(new GetProductCommand(id));
         return Ok(result);
     }
 
-    [HttpGet("ByCategoryId")]
-    public async Task<IActionResult> GetProductsByCategoryId([FromQuery] IdModel model)
+    [HttpGet("category/{id}")]
+    public async Task<IActionResult> GetProductsByCategoryId(int id)
     {
-        var result = await _mediator.Send((new GetProductsByCategoryIdCommand(model.Id)));
+        var result = await _mediator.Send(new GetProductsByCategoryIdCommand(id));
         return Ok(result);
     }
     
-    [HttpGet("ByCountryId")]
-    public async Task<IActionResult> GetProductsByCountryId([FromQuery] IdModel model)
+    [HttpGet("country/{id}")]
+    public async Task<IActionResult> GetProductsByCountryId(int id)
     {
-        var result = await _mediator.Send(new GetProductsByCountryIdCommand(model.Id));
+        var result = await _mediator.Send(new GetProductsByCountryIdCommand(id));
         return Ok(result);
         
     }
     
     [HttpPost]
-    public async Task<IActionResult> AddAsync(ProductModel model)
+    public async Task<IActionResult> AddAsync(FullProductModel model)
     {
-        var result = await _mediator.Send(new CreateProductCommand(model.Code, model.Name, model.Price, model.CategoryId, model.CountryId));
+        var result = await _mediator.Send(new CreateProductCommand(model.Code, model.Name, model.Price, model.CategoryId, model.CountryId, model.CreatedAt, model.EndDate));
         return Ok(result);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(IdModel model)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id,  [FromBody]EditProductModel model)
     {
-        var result = await _mediator.Send(new DeleteProductCommand(model.Id));
+        var result = await _mediator.Send(new UpdateProductCommand(id, model.Code, model.Name, model.Price, model.CountryId, model.CreatedAt, model.EndDate));
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var result = await _mediator.Send(new DeleteProductCommand(id));
         return Ok(result);
     }
     

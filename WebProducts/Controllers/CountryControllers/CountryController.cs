@@ -6,7 +6,7 @@ using WebProducts.Models;
 namespace WebProducts.Controllers.CountryControllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("country")]
 public class CountryController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -16,6 +16,13 @@ public class CountryController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<CountryModel>> GetCountries()
+    {
+        var result = await _mediator.Send(new GetCountriesCommand());
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddAsync(CountryModel model)
     {
@@ -23,10 +30,10 @@ public class CountryController : ControllerBase
         return Ok(result);
     }
     
-    [HttpDelete]
-    public async Task<IActionResult> Delete(IdModel model)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
     {
-        var result = await _mediator.Send(new DeleteCountryCommand(model.Id));
+        var result = await _mediator.Send(new DeleteCountryCommand(id));
         return Ok(result);
     }
 }

@@ -18,16 +18,24 @@ public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand,
         _countryRepository = countryRepository;
         _unitOfWork = unitOfWork;
     }
+    
     public async Task<Country> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
     {
-        var country = new Country()
-        {
-            Name = request.Name
-        };
-        await _countryRepository.Store(country);
-        await _unitOfWork.SaveAsync(cancellationToken);
-        
-        return country;
+      var countries = _countryRepository.Query().ToList();
+      if (countries.Any(x => x.Name == request.Name))
+      {
+          throw new InvalidOperationException($"Country with name '{request.Name}' already exists.");
+      }
+      
+      var country = new Country()
+      {
+          Name = request.Name
+      };
+      
+      await _countryRepository.Store(country);
+      await _unitOfWork.SaveAsync(cancellationToken);
+      
+      return country;
     }
-    
+
 }

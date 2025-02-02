@@ -23,6 +23,17 @@ builder.Services.AddControllers();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")  
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+
 
 var app = builder.Build();
 
@@ -36,6 +47,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowAngular");
 
 app.MapControllers();
 

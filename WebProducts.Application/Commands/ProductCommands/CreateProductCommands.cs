@@ -4,7 +4,7 @@ using WebProducts.Infrastructure.Repositories;
 
 namespace WebProducts.Application.Commands.ProductCommands;
 
-public record CreateProductCommand(int Code, string Name, decimal Price, int CategoryId, int CountryId) : IRequest<Product>;
+public record CreateProductCommand(int Code, string Name, decimal Price, int CategoryId, int CountryId, DateTime CreatedAt, DateTime EndDate) : IRequest<Product>;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
 {
@@ -25,7 +25,9 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             Name = request.Name,
             Price = request.Price,
             CategoryId = request.CategoryId,
-            CountryId = request.CountryId
+            CountryId = request.CountryId,
+            CreatedAt = request.CreatedAt,
+            EndDate = request.EndDate
         };
 
         await _productRepository.Store(product);

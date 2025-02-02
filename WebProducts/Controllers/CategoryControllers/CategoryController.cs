@@ -7,7 +7,7 @@ using WebProducts.Models;
 
 namespace WebProducts.Controllers.CategoryControllers;
 [ApiController]
-[Route("[controller]")]
+[Route("category")]
 public class CategoryController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -17,14 +17,14 @@ public class CategoryController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("single")]
-    public async Task<IActionResult> GetSingleCategory([FromQuery]IdModel model)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSingleCategory(int id)
     {
-        var result = await _mediator.Send(new GetCategoryCommand(model.Id));
+        var result = await _mediator.Send(new GetCategoryCommand(id));
         return Ok(result);
     }
 
-    [HttpGet("CategoryTree")]
+    [HttpGet("category-tree")]
     public async Task<IActionResult> GetCategoryTree()
     {
         var result = await _mediator.Send(new GetCategoryTreeCommand());
@@ -37,20 +37,20 @@ public class CategoryController : ControllerBase
         var result = await _mediator.Send(new CreateCategoryCommand(model.Name, model.ParentId));
         return Ok(result);
     }
-    
-    [HttpPut]
-    public async Task<IActionResult> UpdateAsync(FullCategoryModel model)
-    {
-        var result = await _mediator.Send(new UpdateCategoryCommand(model.Id, model.Name));
-        return Ok(result);
-    }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(IdModel model)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] Dictionary<string, string> body)
     {
-        var result = await _mediator.Send(new DeleteCategoryCommand(model.Id));
+        var name = body["name"];
+        var result = await _mediator.Send(new UpdateCategoryCommand(id, name));
         return Ok(result);
     }
     
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var result = await _mediator.Send(new DeleteCategoryCommand(id));
+        return Ok(result);
+    }
     
 }
