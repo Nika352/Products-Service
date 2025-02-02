@@ -17,7 +17,7 @@ public static class DIExtensions
         
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICountryRepository, CountryRepository>();
-        
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         return services;

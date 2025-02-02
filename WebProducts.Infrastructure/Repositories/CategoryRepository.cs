@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebProducts.Infrastructure.Repositories;
 
-public class CategoryRepository : IRepository<Category>
+public interface ICategoryRepository : IRepository<Category>{}
+
+public class CategoryRepository : ICategoryRepository
 {
     private readonly ProductsDbContext _dbContext;
 
@@ -32,8 +34,10 @@ public class CategoryRepository : IRepository<Category>
         await _dbContext.Categories.AddAsync(document);
     }
 
-    public void Delete(Category document)
+    public void Delete(int id)
     {
-        _dbContext.Categories.Remove(document);
+        var categoryToDelete = _dbContext.Categories.FirstOrDefault(x => x.Id == id);
+        if (categoryToDelete != null)
+            _dbContext.Categories.Remove(categoryToDelete);
     }
 }

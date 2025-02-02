@@ -15,6 +15,7 @@ public class ProductsDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         modelBuilder.Entity<Product>()
             .HasOne(p => p.Category)
             .WithMany(p => p.Products)
@@ -24,6 +25,7 @@ public class ProductsDbContext : DbContext
             .HasOne(p => p.Country)
             .WithMany(p => p.Products)
             .HasForeignKey(p => p.CountryId);
+        
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

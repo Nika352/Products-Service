@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using WebProducts.Infrastructure.Persistence.Entities;
 using WebProducts.Infrastructure.Repositories;
 
@@ -11,23 +12,22 @@ public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand,
 {
     private readonly ICountryRepository _countryRepository;
     private readonly IUnitOfWork _unitOfWork;
-
-
+    
     public CreateCountryCommandHandler(ICountryRepository countryRepository, IUnitOfWork unitOfWork)
     {
         _countryRepository = countryRepository;
         _unitOfWork = unitOfWork;
     }
-    public Task<Country> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
+    public async Task<Country> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
     {
         var country = new Country()
         {
             Name = request.Name
         };
-        _countryRepository.Store(country);
-        _unitOfWork.SaveAsync(cancellationToken);
+        await _countryRepository.Store(country);
+        await _unitOfWork.SaveAsync(cancellationToken);
         
-        return Task.FromResult(country);
+        return country;
     }
     
 }

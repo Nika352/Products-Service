@@ -30,14 +30,18 @@ public class CountryRepository : ICountryRepository
             _dbContext.Countries.AsQueryable();
     }
 
+    //Add country to data table
     public async Task Store(Country document)
     {
        await _dbContext.Countries.AddAsync(document);
     }
 
-    public void Delete(Country document)
+    //Delete country from data table
+    public void Delete(int id)
     {
-        _dbContext.Countries.Remove(document);
+        var countryToDelete = _dbContext.Countries.FirstOrDefault(x => x.Id == id);
+        if (countryToDelete != null)
+            _dbContext.Countries.Remove(countryToDelete);
     }
     
 }

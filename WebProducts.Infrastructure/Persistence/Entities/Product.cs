@@ -1,4 +1,5 @@
-﻿using WebProducts.Infrastructure.Persistence.Abstraction;
+﻿using System.Text.Json.Serialization;
+using WebProducts.Infrastructure.Persistence.Abstraction;
 
 namespace WebProducts.Infrastructure.Persistence.Entities;
 

@@ -22,4 +22,11 @@ public class CountryController : ControllerBase
         var result = await _mediator.Send(new CreateCountryCommand(model.Name));
         return Ok(result);
     }
+    
+    [HttpDelete]
+    public async Task<IActionResult> Delete(IdModel model)
+    {
+        var result = await _mediator.Send(new DeleteCountryCommand(model.Id));
+        return Ok(result);
+    }
 }

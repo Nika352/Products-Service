@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using WebProducts.Infrastructure.Persistence.Entities;
 
 namespace WebProducts.Infrastructure.Repositories.Repository;
 
@@ -10,5 +11,5 @@ public interface IRepository<T>  where T : class
 
     Task Store(T document);
 
-    void Delete(T document);
+    void Delete(int id);
 }

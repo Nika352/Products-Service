@@ -21,14 +21,19 @@ public class ProductRepository : IProductRepository
     
     public async Task<Product> Find(int id)
     {
-        return await _dbContext.Products.FirstAsync(x => x.Id == id);
+        return await _dbContext.Products
+            .Include(p => p.Category)
+            .Include(p => p.Country)
+            .FirstAsync(x => x.Id == id);
     }
 
     public IQueryable<Product> Query(Expression<Func<Product, bool>>? expression = null)
     {
-        return expression != null ? 
-            _dbContext.Products.Where(expression) :
-            _dbContext.Products.AsQueryable();
+        var query = _dbContext.Products
+            .Include(x => x.Category)  
+            .Include(x => x.Country);  
+
+        return expression != null ? query.Where(expression) : query;
     }
 
     public async Task Store(Product document)
@@ -36,8 +41,10 @@ public class ProductRepository : IProductRepository
         await _dbContext.Products.AddAsync(document);
     }
 
-    public void Delete(Product document)
+    public void Delete(int id)
     {
-        _dbContext.Products.Remove(document);
+        var productToDelete = _dbContext.Products.FirstOrDefault(x => x.Id == id);
+        if (productToDelete != null)
+            _dbContext.Products.Remove(productToDelete);
     }
 }
