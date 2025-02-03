@@ -26,8 +26,15 @@ public class CountryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddAsync(CountryModel model)
     {
-        var result = await _mediator.Send(new CreateCountryCommand(model.Name));
-        return Ok(result);
+        try
+        {
+            var result = await _mediator.Send(new CreateCountryCommand(model.Name));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
     
     [HttpDelete("{id}")]

@@ -21,7 +21,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
     public async Task<int> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
         var categories = _repository.Query().ToList();
-        var categoriesToDelete = ChildCategories(categories, request.Id); //Recursively gets all child categories so we can delete them
+        var categoriesToDelete = ChildCategories(categories, request.Id); 
         foreach (var id in categoriesToDelete)
         {
             _repository.Delete(id);

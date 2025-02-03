@@ -81,3 +81,4 @@ D:\Git\WebProducts\WebProducts\bin\Debug\net7.0\MediatR.Contracts.dll
 D:\Git\WebProducts\WebProducts\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\Git\WebProducts\WebProducts\bin\Debug\net7.0\WebProducts.Application.dll
 D:\Git\WebProducts\WebProducts\bin\Debug\net7.0\WebProducts.Application.pdb
+D:\Git\WebProducts\WebProducts\bin\Debug\net7.0\FluentValidation.dll
